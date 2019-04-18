@@ -98,25 +98,25 @@
 
 
 //////////////////	Step 9	//////////////////
-//String.prototype.findWords = function(string, keyWord) {
-//    "use strict";
-//    var words = string.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').split(/\s/);
-//    var freqMap = {};
-//    words.forEach(function(w) {
-//        if (!freqMap[w]) {
-//            freqMap[w] = 0;
-//        }
-//        freqMap[w] += 1;
-//    });
-//    return freqMap;
-//}
-//
-//var keyWord1 = "a";
-//var par = "When I came upon that old abandoned house, betwixt the abysmal black sky and the stone cold graveyard at my feet, a cracked, moss-covered sign read: Experimental Institute for Dementia-Praecox. Standing before a broken-hinged gate my soul shrieked within me like the closing cell doors in such a tormented asylum. For a moment I flinched to a faint echo of what sounded like wallows of terror and crippling pain coming from the rotted, old building. Trembling, I fell to my knees and beheld that the ground seemed to crawl with indiscernible life. The dank soil and decaying leaves oozed juices that penetrated the fabric covering my legs, and I was startled to find that the earth felt somewhat warm. The decaying matter around me sent off a fragrance of death, announcing an unspeakable presence that I could never quite have ascertained from within the realm of the living. A chill breeze descended the crumbling sidewalk that led from the sanguine, iron door and abrasively struck the skin on my face, forcing tears to form in my widened eyes. I was desperately seeking a face in one of those milky old windows, wondering where it was that those eyes, which I intuitively sensed measuring my soul, were hiding. To my dismay, I found them and the Hell to which they will forever be condemned.";
-//
-//var freq = par.findWords(par, keyWord1);
-//
-//Object.keys(freq).sort().forEach(function(word) {
-//    if (word === keyWord1.toLowerCase())
-//        window.console.log("Count of " + word + " is " + freq[word]);
-//});
+String.prototype.findWords = function(string) {
+    "use strict";
+    var words = string.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').split(/\s/);
+    var freqMap = {};
+    words.forEach(function(w) {
+        if (!freqMap[w]) {
+            freqMap[w] = 0;
+        }
+        freqMap[w] += 1;
+    });
+    return freqMap;
+}
+
+var keyWord1 = "a";
+var par = "When I came upon that old abandoned house, betwixt the abysmal black sky and the stone cold graveyard at my feet, a cracked, moss-covered sign read: Experimental Institute for Dementia-Praecox. Standing before a broken-hinged gate my soul shrieked within me like the closing cell doors in such a tormented asylum. For a moment I flinched to a faint echo of what sounded like wallows of terror and crippling pain coming from the rotted, old building. Trembling, I fell to my knees and beheld that the ground seemed to crawl with indiscernible life. The dank soil and decaying leaves oozed juices that penetrated the fabric covering my legs, and I was startled to find that the earth felt somewhat warm. The decaying matter around me sent off a fragrance of death, announcing an unspeakable presence that I could never quite have ascertained from within the realm of the living. A chill breeze descended the crumbling sidewalk that led from the sanguine, iron door and abrasively struck the skin on my face, forcing tears to form in my widened eyes. I was desperately seeking a face in one of those milky old windows, wondering where it was that those eyes, which I intuitively sensed measuring my soul, were hiding. To my dismay, I found them and the Hell to which they will forever be condemned.";
+
+var freq = par.findWords(par, keyWord1);
+
+Object.keys(freq).sort().forEach(function(word) {
+    if (word === keyWord1.toLowerCase())
+        window.console.log("Count of " + word + " is " + freq[word]);
+});

@@ -1,55 +1,75 @@
 /*eslint-env browser*/
-
-var Jukebox = function () {
+var $ = function(id){
     "use strict";
-    var albums = [], self;
-    
-    self = {
-        addAlbum: function (album) {
-            albums.push(album);
-        },
-        favoriteAlbum: function () {
-            var max = -1, fav, i;
+    return window.document.getElementById(id);
+};
 
-            for (i = 0; i < albums.length; i += 1) {
-                if (albums[i].played > max) {
-                    max = albums[i].played;
-                    fav = albums[i];
+window.addEventListener("load", function(){
+    "use strict";
+    var Jukebox = function(){
+        var albums = [], self;
+        self = {
+            addAlbum: function(album){
+                albums.push(album);
+            },
+            favoriteAlbum: function(){
+                var max = -1, fav, i;
+                for(i = 0; i < albums.length; i += 1){
+                    if(albums[i].played > max){
+                        max = albums[i].played;
+                        fav = albums[i];
+                    }
                 }
+                return fav.display();
             }
-            return fav.display();
-        }
+        };
+        return self;
     };
-    return self;
-};
 
-var Album = function (artist, title) {
-    "use strict";
-    var self = {
-        played: 0,
-        play: function () {
-            self.played += 1;
-        },
-        display: function () {
-            return artist + " : " + title + ". The album has been played " + this.played + " times.";
-        }
+    var Album = function(artist, title){
+        var self = {
+            artist: artist,
+            title: title,
+            played: 0,
+            play: function(){
+                self.played += 1;
+                $("favoriteAlbum").innerHTML = "Now playing: " + self.artist + " - " + self.title;
+            },
+            display: function(){
+                return artist + " : " + title + ". The album has been played " + this.played + " times.";
+            }
+        };
+        return self;
     };
-    return self;
-};
 
-var jbox = new Jukebox();
-var album1 = new Album("Operation Ivy", "Energy");
-var album2 = new Album("Blink 182", "Dude Ranch");
-var album3 = new Album("New Found Glory", "Sticks and Stones");
-
-jbox.addAlbum(album1);
-jbox.addAlbum(album2);
-jbox.addAlbum(album3);
-
-album1.play();
-album1.play();
-album1.play();
-album2.play();
-album3.play();
-
-window.console.log("You favorite album is: " + jbox.favoriteAlbum());
+    var jbox = new Jukebox();
+    var albums = [["Operation Ivy", "Energy"], ["Blink 182", "Dude Ranch"], ["New Found Glory", "Sticks and Stones"]];
+    var i, album, albumInstance;
+    var albumCollection = [];
+    var select = $("albums");
+        
+    
+    for(i = 0; i < albums.length; i += 1){
+        album = document.createElement("option");
+        album.textContent = albums[i][0] + " : " + albums[i][1];
+        album.value = i;
+        select.appendChild(album);
+        albumInstance = new Album(albums[i][0], albums[i][1]);
+        jbox.addAlbum(albumInstance);
+        albumCollection.push(albumInstance);
+    }
+    
+    $("play").addEventListener("click", function(){
+       
+        var i = parseInt(select.value, 10);
+        if (isNaN(i)) {
+            window.alert("please select an album!");
+        } else {
+            albumCollection[i].play();
+        }
+    });
+    
+    $("show").addEventListener("click", function(){
+        $("favoriteAlbum").innerHTML = "You favorite album is: " + jbox.favoriteAlbum();
+    });
+});

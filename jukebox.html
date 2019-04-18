@@ -4,12 +4,30 @@
     <meta charset="UTF-8">
     <title>Assignment 7 - The Jukebox Application (30 Points)</title>
     <script src="js/jukebox.js"></script>
+    <style>
+        body{
+            color: #3b2572;
+            max-width: 300px;
+            margin:auto;
+            background: #a7885c;
+        }
+        h1{text-align: center;}
+        input{background-color: #6fcb9f;}
+        select{background: #FF805C;}
+        select option{background: #fffeb3;}
+    </style>
 </head>
 <body>
-    <h1>The Jukebox</h1>
+<h1>The Jukebox</h1>
     <!-- ADD DROP DOWN MENU -->
+    <select id="albums">
+      <option>Pick an artist and album</option>
+    </select>
     <!-- ADD PLAY BUTTON -->
+    <input type="button" value="Play" id="play">
+    <br><br>
     <!-- ADD SHOW FAVORITE ALBUM BUTTON -->
+    <input type="button" value="Show Favorite Album" id="show" style="margin:0px auto; display:block;">
     <p id="favoriteAlbum"></p>
 </body>
 </html>
